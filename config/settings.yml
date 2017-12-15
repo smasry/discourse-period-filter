@@ -1,0 +1,5 @@
+plugins:
+  date_filter_enabled:
+    client: true
+    default: false
+    refresh: true
