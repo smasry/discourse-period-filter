@@ -1,8 +1,6 @@
-{{#if period}}
 <a href {{action "expand"}} class="dropdown-header"  aria-expanded={{expanded}}>
-  <span class='d-label'>{{period-title period}}</span>
+  <span class='d-label'>{{period-title currentPeriod}}</span>
 </a>
-{{/if}}
 <a href {{action "expand"}} class="{{dropdownButtonClass}} dropdown-header">
 {{d-icon expandedIcon}}
 </a>

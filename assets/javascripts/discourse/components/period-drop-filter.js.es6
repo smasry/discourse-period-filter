@@ -2,23 +2,34 @@ import computed from 'ember-addons/ember-computed-decorators';
 
 export default Ember.Component.extend({
   classNames: ['bullet'],
-  period: 'all',
   expanded: false,
-
-  @computed('expanded')
+  period: 'all',
   expandedIcon(expanded) {
     return expanded ? 'd-drop-expanded' : 'd-drop-collapsed';
   },
 
   @computed('period')
-  clickEventName() {
-    return "click.period-drop-" + (this.get('period') || "all");
+  currentPeriod() {
+    let _period = this.get('period');
+    _period = _period.split('/')[1];
+    console.log(_period);
+    return _period || this.get('period') || 'all';
+  },
+
+
+  showMoreUrl(period) {
+    let url = '', category = this.get('category');
+    if (category) {
+      url = '/c/' + Discourse.Category.slugFor(category) + (this.get('noSubcategories') ? '/none' : '') + '/l';
+    }
+    url += '/top/' + period;
+    return url;
   },
 
   actions: {
     changePeriod(p) {
-      this.sendAction('action', p);
       this.set('period', p);
+      DiscourseURL.routeTo(this.showMoreUrl(p));
     },
 
     expand: function() {
