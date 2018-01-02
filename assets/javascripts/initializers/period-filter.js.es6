@@ -4,8 +4,10 @@ export default {
   name: "period-filter",
 
   initialize(container) {
-    DiscoveryTopicsController.reopen({
-      top: true
-    });
+    if (Discourse.SiteSettings.period_filter_enabled) {
+      DiscoveryTopicsController.reopen({
+        top: true
+      });
+    }
   }
 };
